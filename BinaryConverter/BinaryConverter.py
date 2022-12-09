@@ -1,3 +1,4 @@
+from ctypes import windll
 from tkinter import *
 import tkinter
 
@@ -8,17 +9,19 @@ class MainWindow:
     Output = Label()
     ChangeModeButton = Button()
     binaryMode = True
+    windll.shcore.SetProcessDpiAwareness(1)
 
     def __init__(self):
-        self.window.geometry("350x150+500+200")
-        label = Label(text = "Binary Converter", fg='Orange', font=("Arial", 20))
+        self.window.geometry("400x150+500+200")
+        self.window.title("BC")
+        label = Label(text = "Binary Converter", fg='Orange', font=("Arial", 22))
         label.pack()
-        Input = Entry(textvariable=self.sv ,width=20, justify=CENTER, font=("Arial", 14))
+        Input = Entry(textvariable=self.sv ,width=30, justify=CENTER, font=("Arial", 16))
         Input.pack()
         self.sv.trace_add("write", self.EntryModifiedCallback)
-        self.Output = Label(text = "Placeholder", font = ("Arial", 14))
+        self.Output = Label(text = "Placeholder", font = ("Arial", 16))
         self.Output.pack()
-        self.ChangeModeButton = Button(text="Converting to Binary", command=self.ChangeMode)
+        self.ChangeModeButton = Button(text="Converting to Binary", command=self.ChangeMode, font = ("Arial", 14))
         self.ChangeModeButton.pack()
         self.EntryModifiedCallback()
         self.window.mainloop()
